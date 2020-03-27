@@ -11,15 +11,17 @@ import 'intl/locale-data/jsonp/pt-BR';
 
 const Incidents = () => {
   const [incidents, setIncidents] = useState([]);
+  const [total, setTotal] = useState(0);
   const navigation = useNavigation();
-  const navigateToDetail = () => {
-    navigation.navigate('Detail');
+  const navigateToDetail = (incident) => {
+    navigation.navigate('Detail', { incident });
   };
 
   const loadIncidents = async () => {
     try {
       const response = await api.get('incidents');
       setIncidents(response.data);
+      setTotal(response.headers['x-total-count']);
     } catch (error) {
       console.warn(error);
     }
@@ -32,7 +34,7 @@ const Incidents = () => {
       <View style={styles.header}>
         <Image source={logoImg} />
         <Text style={styles.headerText}>
-          Total de <Text styles={styles.headerTextBold}>0 casos.</Text>
+          Total de <Text styles={styles.headerTextBold}>{total} casos.</Text>
         </Text>
       </View>
       <Text style={styles.title}>Bem-vindo!</Text>
@@ -62,7 +64,7 @@ const Incidents = () => {
             </Text>
 
             <TouchableOpacity
-              onPress={navigateToDetail}
+              onPress={() => navigateToDetail(incident)}
               style={styles.detailsButton}
             >
               <Text style={styles.detailsButtonText}>Ver mais detalhes</Text>
