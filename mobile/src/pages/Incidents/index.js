@@ -6,6 +6,9 @@ import logoImg from '../../assets/logo.png';
 import api from '../../services/api';
 import styles from './styles';
 
+import 'intl';
+import 'intl/locale-data/jsonp/pt-BR';
+
 const Incidents = () => {
   const [incidents, setIncidents] = useState([]);
   const navigation = useNavigation();
@@ -51,7 +54,12 @@ const Incidents = () => {
             <Text style={styles.incidentValue}>{incident.title}</Text>
 
             <Text style={styles.incidentProperty}>VALOR:</Text>
-            <Text style={styles.incidentValue}>{incident.value}</Text>
+            <Text style={styles.incidentValue}>
+              {Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+              }).format(incident.value)}
+            </Text>
 
             <TouchableOpacity
               onPress={navigateToDetail}
