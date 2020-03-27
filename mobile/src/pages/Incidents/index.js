@@ -12,21 +12,36 @@ import 'intl/locale-data/jsonp/pt-BR';
 const Incidents = () => {
   const [incidents, setIncidents] = useState([]);
   const [total, setTotal] = useState(0);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
-  const navigateToDetail = (incident) => {
+  const navigateToDetail = incident => {
     navigation.navigate('Detail', { incident });
   };
 
   const loadIncidents = async () => {
-    try {
-      const response = await api.get('incidents');
-      setIncidents(response.data);
-      setTotal(response.headers['x-total-count']);
-    } catch (error) {
-      console.warn(error);
+    if (loading) {
+      return;
     }
+    if (total > 0 && incidents.length >= total) {
+      return;
+    }
+    setLoading(true);
+    try {
+      const response = await api.get('incidents', {
+        params: { page }
+      });
+
+      setIncidents([...incidents, ...response.data]);
+      setTotal(response.headers['x-total-count']);
+      setPage(page + 1);
+    } catch (error) {
+      console.error(error);
+    }
+    setLoading(false);
   };
   useEffect(() => {
+
     loadIncidents();
   }, []);
   return (
@@ -43,6 +58,8 @@ const Incidents = () => {
       </Text>
 
       <FlatList
+        onEndReached={loadIncidents}
+        onEndReachedThreshold={0.2}
         data={incidents}
         style={styles.incidentList}
         keyExtractor={incident => String(incident.id)}
