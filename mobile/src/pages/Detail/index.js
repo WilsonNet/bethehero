@@ -10,13 +10,13 @@ const Detail = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Image source={logoImg} />
+        <TouchableOpacity onPress={() => {}}>
+          <Feather name="arrow-left" size={28} color="#E02041" />
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity onPress={() => {}}>
-        <Feather name="arrow-left" size={28} color="#E02041" />
-      </TouchableOpacity>
 
       <View style={styles.incident}>
-        <Text style={styles.incidentProperty}>ONG:</Text>
+        <Text style={(styles.incidentProperty, { marginTop: 0 })}>ONG:</Text>
         <Text style={styles.incidentValue}>APAD</Text>
 
         <Text style={styles.incidentProperty}>CASO:</Text>
