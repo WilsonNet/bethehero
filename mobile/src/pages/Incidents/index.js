@@ -36,6 +36,36 @@ const Incidents = () => {
             <Feather name="arrow-right" size={16} color="#E02041" />
           </TouchableOpacity>
         </View>
+        <View style={styles.incident}>
+          <Text style={styles.incidentProperty}>ONG:</Text>
+          <Text style={styles.incidentValue}>APAD</Text>
+
+          <Text style={styles.incidentProperty}>CASO:</Text>
+          <Text style={styles.incidentValue}>Cadelinha atropelada</Text>
+
+          <Text style={styles.incidentProperty}>VALOR:</Text>
+          <Text style={styles.incidentValue}>R$ 120,00</Text>
+
+          <TouchableOpacity onPress={() => {}} style={styles.detailsButtonText}>
+            <Text style={styles.detailsButtonText}>Ver mais detalhes</Text>
+            <Feather name="arrow-right" size={16} color="#E02041" />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.incident}>
+          <Text style={styles.incidentProperty}>ONG:</Text>
+          <Text style={styles.incidentValue}>APAD</Text>
+
+          <Text style={styles.incidentProperty}>CASO:</Text>
+          <Text style={styles.incidentValue}>Cadelinha atropelada</Text>
+
+          <Text style={styles.incidentProperty}>VALOR:</Text>
+          <Text style={styles.incidentValue}>R$ 120,00</Text>
+
+          <TouchableOpacity onPress={() => {}} style={styles.detailsButtonText}>
+            <Text style={styles.detailsButtonText}>Ver mais detalhes</Text>
+            <Feather name="arrow-right" size={16} color="#E02041" />
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
